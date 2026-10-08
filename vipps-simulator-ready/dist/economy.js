@@ -1,0 +1,4 @@
+export const upgrades=[{name:'Lommepenger',desc:'Litt ekstra fra hverdagen',base:100,add:2,icon:'heart'},{name:'Deltidsjobb',desc:'Flere vakter, høyere lønn',base:400,add:8,icon:'case'},{name:'Sideprosjekt',desc:'La ideene dine tjene penger',base:1500,add:30,icon:'spark'},{name:'Egen bedrift',desc:'Bygg noe som vokser',base:6000,add:120,icon:'people'}];
+export const cost=(i,l)=>upgrades[i].base*(l+1)*(l+1);
+export const rate=levels=>10+levels.reduce((s,l,i)=>s+l*upgrades[i].add,0);
+export function settle(p,now=Date.now()){const elapsed=Math.max(0,(now-p.stamp)/60000),r=rate(p.levels);p.pending+=elapsed*r;p.stamp=now;const hours=Math.floor((now-p.paid)/3600000);if(hours>0){const remainder=Math.max(0,(now-(p.paid+hours*3600000))/60000)*r;const pay=Math.max(0,p.pending-remainder);p.balance+=pay;p.pending=remainder;p.paid+=hours*3600000;return pay;}return 0;}

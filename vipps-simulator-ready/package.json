@@ -1,0 +1,13 @@
+{
+  "name": "vipps-spill",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.cjs",
+    "build": "node build.cjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "type": "module"
+}
